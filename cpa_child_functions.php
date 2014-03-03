@@ -1,28 +1,24 @@
 <?php
-
-
 /** CPA Customization
  * Unknown function - find out what this is related to
  *
  * 
  */
 function register_my_menus() {
-register_nav_menus(
-array(
-'primary' => __( 'Profile Menu' ),
-'sidebar-menu' => __( 'Sidebar Menu' )
-)
-);
+	register_nav_menus( array(
+		'primary' => __( 'Profile Menu' ),
+		'sidebar-menu' => __( 'Sidebar Menu' )
+	));
 }
 add_action( 'init', 'register_my_menus' );
 
 
 function image_tag($html, $id, $alt, $title) {
 	return preg_replace(array(
-			'/'.str_replace('//','//',get_bloginfo('url')).'/i',
-			'/s+width="d+"/i',
-			'/s+height="d+"/i',
-			'/alt=""/i'
+		'/'.str_replace('//','//',get_bloginfo('url')).'/i',
+		'/s+width="d+"/i',
+		'/s+height="d+"/i',
+		'/alt=""/i'
 		),
 		array(
 			'',
@@ -35,14 +31,13 @@ function image_tag($html, $id, $alt, $title) {
 add_filter('get_image_tag', 'image_tag', 0, 4);
 
 
-
 /** CPA Customization
  * Shows Featured Post Slider
  *
  * @uses catcheverest_header action to add it in the header
  */
 function catcheverest_post_sliders() { 
-	//delete_transient( 'catcheverest_post_sliders' );
+	delete_transient( 'catcheverest_post_sliders' );
 	
 	global $post, $catcheverest_options_settings;
    	$options = $catcheverest_options_settings;
@@ -121,5 +116,3 @@ function catcheverest_child_responsive() {
 	}
 }
 add_action( 'wp_head', 'catcheverest_child_responsive', 5 );
-
-?>
